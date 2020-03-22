@@ -1,0 +1,3 @@
+let fact n = if n>1 then n * rec n-1 else 1
+
+let main = map (n.print fact n) (range 0 10)

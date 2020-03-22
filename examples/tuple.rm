@@ -1,0 +1,5 @@
+type Point(x, y)
+
+let add p1 p2 = let Point(x1, y1) = p1 in
+                let Point(x2, y2) = p2 in
+                    Point(x1+x2, y1+y2)

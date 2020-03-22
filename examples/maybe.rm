@@ -1,0 +1,6 @@
+data Maybe = Just(x) | Nothing
+
+
+let divide m n = if n == 0 then Nothing
+                       else Just(m / n)
+
