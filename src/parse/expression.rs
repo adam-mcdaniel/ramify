@@ -1,16 +1,15 @@
 use nom::{
     branch::alt,
-    bytes::complete::{tag, take_while, take_while1},
-    character::complete::{alpha1, char, digit1, multispace0, multispace1, one_of},
-    combinator::{cut, map, map_res, opt},
-    error::{context, convert_error, make_error, ErrorKind, ParseError},
-    multi::{many0, many1, separated_list},
+    bytes::complete::tag,
+    combinator::map,
+    error::{make_error, ErrorKind},
+    multi::{many1, separated_list},
     number::complete::double,
-    sequence::{delimited, preceded, separated_pair, terminated, tuple},
-    Err, IResult,
+    sequence::{delimited, preceded, separated_pair, tuple},
+    IResult,
 };
 
-use crate::ast::{Constructor, Data, Expression};
+use crate::ast::Expression;
 use alloc::{
     collections::BTreeMap,
     rc::Rc,

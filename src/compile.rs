@@ -1,3 +1,4 @@
+use crate::compiler_error;
 use crate::Combinator;
 use alloc::string::String;
 
@@ -86,7 +87,7 @@ impl Target<CompilerError> for Golang {
                 Ok(result)
             }
 
-            otherwise => panic!("Malformed Combinator '{}'", otherwise),
+            otherwise => compiler_error(format!("Malformed Combinator '{}'", otherwise)),
         }
     }
 }

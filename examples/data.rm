@@ -2,7 +2,10 @@
 data Result = Ok(t) | Err(e)
 data Shape = Circle(r) | Triangle(b, h) | Rectangle(w, h)
 
-let print shape = case shape of 
-                    | Circle(radius)  => print "c" radius
-                    | Triangle(b, h)  => print "t" b h
-                    | Rectangle(w, h) => print "r" w h
+let print_shape shape = case shape of 
+                    | Circle(radius)  => print "c " radius
+                    | Triangle(b, h)  => print "t " b " " h
+                    | Rectangle(w, h) => print "r " w " " h
+
+
+let main _ = print_shape (Triangle(5, 10))

@@ -1,6 +1,10 @@
 data Maybe = Just(x) | Nothing
 
+let print_maybe val = case val of 
+                        | Just(x) => print "Just " x
+                        | Nothing => print "Nothing"
 
 let divide m n = if n == 0 then Nothing
                        else Just(m / n)
 
+let main _ = print_maybe (divide 5 2)

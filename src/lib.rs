@@ -24,3 +24,8 @@ pub use parse::{
         parse_function_declaration, parse_type_declaration,
     },
 };
+
+pub fn compiler_error(message: impl ToString) -> ! {
+    eprintln!("error: {}", message.to_string());
+    std::process::exit(1);
+}

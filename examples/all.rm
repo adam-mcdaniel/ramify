@@ -1,0 +1,40 @@
+
+const True  = a.b.a
+const False = a.b.b
+const Null  = x.True
+
+const ZERO = False
+const ONE  = f.x.f x
+const TWO  = f.x.f (f x)
+const THREE  = f.x.f (f (f x))
+let and a b = a b a
+let or  a b = a a b
+let not a = a False True
+data Result = Ok(x) | Err(e)
+let input n = if n then Ok("test") else Err("invalid argument to input")
+let test n = case input n of
+                | Ok(x) => print "You said: " x
+                | Err(e) => print "Error: " e
+let succ   n f x =   f (n f x)
+let pred   n f x = n (g.h.h (g f)) (u.x) (u.u)
+let sub  m n     = n pred m
+let add  m n f x = m f (n f x)
+let mul  m n f   = m   (n f)
+let pow  base exponent = exponent base
+
+
+type Point(x, y)
+
+let add_points p1 p2 = let Point(x1, y1) = p1 in
+                            let Point(x2, y2) = p2 in Point(x1, y2)
+
+data Shape = Rectangle(width, height) | Circle(radius)
+let test_shape shape = case shape of
+                            | Rectangle(w, h) => TWO
+                            | Circle(r) => ONE
+
+# let main _ = let Point(x, y) = add_points Point(1, 1) Point(2, 2) in x
+
+let factorial n = if n>1 then n*(rec n-1) else 1
+
+let main _ = print (5 / 7)

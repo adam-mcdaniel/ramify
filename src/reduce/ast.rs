@@ -1,25 +1,18 @@
 use crate::{
-    ast::{Expression, Function, AST},
+    ast::AST,
     lambda::Lambda,
     reduce::{Reduce, ReductionError},
 };
 
 impl Reduce<()> for AST {
-    fn reduce(&self, d: &()) -> Result<Lambda, ReductionError> {
-        let bad = String::from("bad");
-        let mut result = Function::new(
-            bad.clone(),
-            vec![bad.clone()],
-            Expression::Identifier(bad.clone()),
-        );
-
+    fn reduce(&self, _: &()) -> Result<Lambda, ReductionError> {
         for function in self.get_functions() {
             if function.get_name() == "main" {
-                result = function.clone();
+                return function.reduce(self.get_data());
             }
         }
 
-        Ok(result.reduce(self.get_data())?)
+        Err(ReductionError::NoEntryPoint)
     }
 }
 

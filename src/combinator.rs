@@ -1,3 +1,4 @@
+use crate::compiler_error;
 use alloc::{
     collections::BTreeMap,
     rc::Rc,
@@ -44,6 +45,7 @@ pub const B: Combinator = Combinator::B { x: None, y: None };
 pub const C: Combinator = Combinator::C { x: None, y: None };
 pub const K: Combinator = Combinator::K { x: None };
 pub const I: Combinator = Combinator::I;
+#[allow(non_upper_case_globals)]
 pub const Nil: Combinator = Combinator::Nil;
 
 #[inline]
@@ -88,7 +90,7 @@ impl Combinator {
             Self::S {
                 x: None,
                 y: Some(_),
-            } => panic!("Malformed Substitution combinator"),
+            } => compiler_error("Malformed Substitution combinator"),
 
             Self::B { x: None, y: None } => Self::S {
                 x: Some(Rc::new(arg)),
@@ -108,7 +110,7 @@ impl Combinator {
             Self::B {
                 x: None,
                 y: Some(_),
-            } => panic!("Malformed Bluebird combinator"),
+            } => compiler_error("Malformed Bluebird combinator"),
 
             Self::C { x: None, y: None } => Self::S {
                 x: Some(Rc::new(arg)),
@@ -128,7 +130,7 @@ impl Combinator {
             Self::C {
                 x: None,
                 y: Some(_),
-            } => panic!("Malformed Flip Combinator"),
+            } => compiler_error("Malformed Flip Combinator"),
 
             Self::K { x: Some(a) } => (**a).clone(),
             Self::K { x: None } => match arg {
@@ -173,7 +175,7 @@ impl Display for Combinator {
             Self::S {
                 x: None,
                 y: Some(_),
-            } => panic!("Malformed Substitution Combinator"),
+            } => compiler_error("Malformed Substitution Combinator"),
 
             Self::K { x: Some(a) } => write!(f, "K({})", a),
             Self::K { x: None } => write!(f, "K"),
@@ -192,7 +194,7 @@ impl Display for Combinator {
             Self::B {
                 x: None,
                 y: Some(_),
-            } => panic!("Malformed Bluebird Combinator"),
+            } => compiler_error("Malformed Bluebird Combinator"),
 
             Self::C {
                 x: Some(a),
@@ -206,7 +208,7 @@ impl Display for Combinator {
             Self::C {
                 x: None,
                 y: Some(_),
-            } => panic!("Malformed Flip Combinator"),
+            } => compiler_error("Malformed Flip Combinator"),
 
             Self::Table(t) => {
                 write!(f, "{{ ")?;
@@ -256,7 +258,7 @@ impl Debug for Combinator {
             Self::S {
                 x: None,
                 y: Some(_),
-            } => panic!("Malformed Substitution Combinator"),
+            } => compiler_error("Malformed Substitution Combinator"),
 
             Self::K { x: Some(a) } => write!(f, "K({:?})", a),
             Self::K { x: None } => write!(f, "K"),
@@ -275,7 +277,7 @@ impl Debug for Combinator {
             Self::B {
                 x: None,
                 y: Some(_),
-            } => panic!("Malformed Bluebird Combinator"),
+            } => compiler_error("Malformed Bluebird Combinator"),
 
             Self::C {
                 x: Some(a),
@@ -289,7 +291,7 @@ impl Debug for Combinator {
             Self::C {
                 x: None,
                 y: Some(_),
-            } => panic!("Malformed Flip Combinator"),
+            } => compiler_error("Malformed Flip Combinator"),
 
             Self::Table(t) => {
                 write!(f, "{{ ")?;

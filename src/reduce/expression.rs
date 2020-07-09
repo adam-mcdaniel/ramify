@@ -12,7 +12,7 @@ fn y(f: Combinator) -> Combinator {
     builtin("Y", move |x| {
         loop {
             let result = f.applied_to(x.clone());
-            println!("result {:?}", result);
+            // println!("result {:?}", result);
             result.applied_to(builtin("Y", y).applied_to(result.clone()));
         }
     })

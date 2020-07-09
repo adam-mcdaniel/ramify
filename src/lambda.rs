@@ -1,4 +1,4 @@
-use crate::{Combinator, I, K, S};
+use crate::{compiler_error, Combinator, I, K, S};
 use alloc::{
     rc::Rc,
     string::{String, ToString},
@@ -54,9 +54,9 @@ impl Lambda {
     pub fn to_combinator(&self) -> Combinator {
         match self.optimize() {
             Self::Application(a, b) => a.to_combinator().applied_to(b.to_combinator()),
-            Self::Binding(x) => panic!("Free variable '{}' never defined", x),
+            Self::Binding(x) => compiler_error(format!("Free variable '{}' never defined", x)),
             Self::Combinator(c) => c,
-            otherwise => panic!("Uncompileable abstraction {}", otherwise),
+            otherwise => compiler_error(format!("Uncompileable abstraction {}", otherwise)),
         }
     }
 

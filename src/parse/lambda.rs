@@ -1,29 +1,19 @@
 use nom::{
-    branch::alt,
-    bytes::complete::{tag, take_while, take_while1},
-    character::complete::{alpha1, char, digit1, multispace0, multispace1, one_of},
-    combinator::{cut, map, map_res, opt},
-    error::{context, convert_error, make_error, ErrorKind, ParseError},
-    multi::{many0, many1, separated_list},
-    sequence::{delimited, preceded, separated_pair, terminated, tuple},
-    Err, IResult,
+    branch::alt, bytes::complete::tag, combinator::map, multi::many1, sequence::separated_pair,
+    IResult,
 };
 
-use crate::ast::{Constructor, Data, Expression};
+use crate::ast::Expression;
 use crate::parse::{
     basic::{parse_identifier, sp},
     expression::{parse_atom, parse_expression},
 };
-use alloc::{
-    rc::Rc,
-    string::{String, ToString},
-    vec::Vec,
-};
+use alloc::{rc::Rc, string::String};
 
 pub(crate) fn parse_tailcall(input: &str) -> IResult<&str, Expression> {
     // println!("parse_application: {:?}", input);
     let (input, _) = sp(input)?;
-    let (input, mut f) = tag("rec")(input)?;
+    let (input, _) = tag("rec")(input)?;
 
     let (input, args) = many1(alt((parse_atom, parse_abstraction)))(input)?;
 

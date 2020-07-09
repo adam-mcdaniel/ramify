@@ -1,8 +1,5 @@
 use alloc::{collections::BTreeMap, rc::Rc, string::String, vec::Vec};
-use core::{
-    cmp::Ordering,
-    fmt::{Debug, Error, Formatter},
-};
+use core::fmt::{Debug, Error, Formatter};
 
 #[derive(Clone, Debug, PartialEq, PartialOrd)]
 pub struct AST {

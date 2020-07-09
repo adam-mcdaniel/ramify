@@ -6,7 +6,9 @@ pub(crate) mod function;
 use crate::lambda::Lambda;
 
 #[derive(Clone, Debug, PartialEq, PartialOrd)]
-pub enum ReductionError {}
+pub enum ReductionError {
+    NoEntryPoint,
+}
 
 pub trait Reduce<T> {
     fn reduce(&self, t: &T) -> Result<Lambda, ReductionError>;

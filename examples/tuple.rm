@@ -3,3 +3,8 @@ type Point(x, y)
 let add p1 p2 = let Point(x1, y1) = p1 in
                 let Point(x2, y2) = p2 in
                     Point(x1+x2, y1+y2)
+
+let print_point point = let Point(x, y) = point in
+    print "(" x ", " y ")"
+
+let main _ = print_point (add Point(3, 3) Point(4, 5))
