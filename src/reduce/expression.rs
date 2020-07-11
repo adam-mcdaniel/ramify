@@ -122,12 +122,12 @@ impl Reduce<Vec<Data>> for Expression {
             }))
             .applied_to(a.reduce(d)?)
             .applied_to(b.reduce(d)?),
-            Self::NotEqual(a, b) => Lambda::Combinator(builtin("eq", |a| {
-                builtin(format!("eq({:?})", a), move |b| {
+            Self::NotEqual(a, b) => Lambda::Combinator(builtin("neq", |a| {
+                builtin(format!("neq({:?})", a), move |b| {
                     if a == b {
-                        Lambda::lambda("a", Lambda::lambda("b", Lambda::var("a"))).to_combinator()
-                    } else {
                         Lambda::lambda("a", Lambda::lambda("b", Lambda::var("b"))).to_combinator()
+                    } else {
+                        Lambda::lambda("a", Lambda::lambda("b", Lambda::var("a"))).to_combinator()
                     }
                 })
             }))
@@ -228,6 +228,8 @@ impl Reduce<Vec<Data>> for Expression {
                 cons.applied_to(result)
             }
             Self::Identifier(i) => match i.as_str() {
+                "true" => Lambda::Combinator(K),
+                "false" => Lambda::Combinator(S.applied_to(K)),
                 "print" => Lambda::Combinator(foreign("print")),
                 "println" => Lambda::Combinator(foreign("println")),
                 "Y" => Lambda::Combinator(builtin("Y", y)),

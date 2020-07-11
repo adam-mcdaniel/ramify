@@ -1,0 +1,4 @@
+
+let equal a b = a == b
+
+let main _ = print ((equal 4 5) "true" "false")

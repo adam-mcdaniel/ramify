@@ -53,9 +53,8 @@ fn main() {
                                 .output()
                             {
                                 eprintln!("error: go compiler not installed");
-                            } else {
-                                remove_file(OUTPUT_FILE).unwrap();
                             }
+                            remove_file(OUTPUT_FILE).unwrap();
 
                             if PathBuf::from(output_exe).exists() {
                                 println!("compilation successful");
